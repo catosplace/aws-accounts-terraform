@@ -7,6 +7,11 @@ variable "billing_default_arn" {}
 variable "aws_default_region" {}
 variable "org_name" {}
 
+variable "org_name_suffix" {
+  default = "master"
+  type    = string
+}
+
 variable "terraform_state_bucket" {}
 variable "terraform_state_dynamodb_table" {}
 
