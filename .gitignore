@@ -1,8 +1,20 @@
 # Terraform
-**/.terraform/*
+
+# Compiled files
 *.tfstate
-*.tfstate.*
+*.tfstate.backup
+
+# Module directory
+.terraform/
+
+# Terragrunt
+
+# Terragrunt Cache
+.terragrunt-cache/
 
 # OS X
 .history
 .DS_Store
+
+# VSCode
+.vscode/
