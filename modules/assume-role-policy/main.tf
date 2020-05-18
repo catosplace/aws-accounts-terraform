@@ -11,6 +11,10 @@ data "aws_iam_policy_document" "assume_role" {
 
 resource "aws_iam_policy" "assume_role" {
   name        = "${replace(title(var.account_name),"/-| /","")}${replace(title(var.role),"/-| /","")}RoleAccess"
-  policy      = "${data.aws_iam_policy_document.assume_role.json}"
+  policy      = data.aws_iam_policy_document.assume_role.json
   description = "Grants role assuption for the ${title(var.role)} role in the ${title(var.account_name)} account"
+}
+
+terraform {
+  required_version = "~> 0.12"
 }

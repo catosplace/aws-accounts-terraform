@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-DEFAULT_REGION='us-east-1'
+DEFAULT_REGION='ap-southeast-1'
 
 function usage {
     echo "DESCRIPTION:"
