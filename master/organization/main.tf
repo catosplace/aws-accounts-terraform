@@ -51,6 +51,10 @@ resource "aws_iam_account_alias" "alias" {
 }
 
 provider "aws" {
+  version = "~> 2.62"
+}
+
+provider "aws" {
   alias = "assume_infosec"
 
   assume_role {
