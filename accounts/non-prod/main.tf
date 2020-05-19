@@ -29,8 +29,9 @@ data "terraform_remote_state" "infosec" {
 }
 
 provider "aws" {
-  alias  = "noassume"
-  region = var.aws_default_region
+  alias    = "noassume"
+  region   = var.aws_default_region
+  version  = "~> 2.62"
 }
 
 provider "aws" {
