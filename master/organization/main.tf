@@ -178,9 +178,9 @@ data "aws_iam_policy_document" "terragrunt_reader" {
 
 resource "aws_iam_policy" "terragrunt_reader" {
   name        = "TerragruntReadAccess"
-  policy      = "${data.aws_iam_policy_document.terragrunt_reader.json}"
+  policy      = data.aws_iam_policy_document.terragrunt_reader.json
   description = "Grants permissions to read Terraform remote state"
-  provider    = "aws.assume_infosec"
+  provider    = aws.assume_infosec
 }
 
 data "aws_iam_policy_document" "crossaccount_assume_from_infosec" {
@@ -258,7 +258,7 @@ module "cross_account_role_terragrunt_admin" {
   source = "../../modules/cross-account-role"
 
   providers = {
-    aws = "aws.assume_infosec"
+    aws = aws.assume_infosec
   }
 
   assume_role_policy_json = data.aws_iam_policy_document.crossaccount_assume_from_infosec_and_master.json
