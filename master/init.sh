@@ -87,8 +87,8 @@ if [[ -n "${SKIP_LOCAL_STATE}" ]]; then
 else
     echo "=== RUNNING ORG CONFIGS WITH LOCAL STATE ==="
     cp overrides/backend_local_override.tf .
-    terragrunt init --terragrunt-config terraform-local.hcl
-    terragrunt apply --terragrunt-config terraform-local.hcl
+    terragrunt init --terragrunt-config terragrunt-local.hcl
+    terragrunt apply --terragrunt-config terragrunt-local.hcl
     INFOSEC_AWS_ACCT=$(terraform output infosec_acct_id)
     
     echo "=== COPYING LOCAL STATE TO S3 ==="
