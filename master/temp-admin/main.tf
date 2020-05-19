@@ -5,7 +5,7 @@ terraform {
 data "terraform_remote_state" "organization" {
   backend = "s3"
 
-  config {
+  config = {
     bucket   = var.terraform_state_bucket
     key      = "master/organization/terraform.tfstate"
     region   = var.terraform_state_bucket_region
