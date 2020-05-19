@@ -52,6 +52,7 @@ resource "aws_iam_account_alias" "alias" {
 
 provider "aws" {
   version = "~> 2.62"
+  region = var.aws_default_region
 }
 
 provider "aws" {
