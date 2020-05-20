@@ -2,7 +2,7 @@
 
 This repository contains the Terraform configurations needed to bootstrap and manage a multi-account AWS organization. It also includes the various roles required within the accounts.
 
-At Hypr, we use this as the foundation for our client AWS accounts. We then create a separate repository that contains the actual users and resources used in the organization.
+We use this as the foundation for our client AWS accounts. We then create a separate repository that contains the actual users and resources used in the organization.
 
 To achieve a more secure AWS account structure, we take advantage of [AWS Organizations](https://aws.amazon.com/organizations) to structure our AWS accounts and resources in a more manageable way with granular security controls. The implementation chosen is a hybrid multi-account structure that provides substantial security benefits by separating Identity and Access Management (IAM) from actual AWS resources.
 
