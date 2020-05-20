@@ -26,7 +26,7 @@ provider "aws" {
 
 provider "aws" {
   assume_role {
-    role_arn = "arn:aws:iam::${data.terraform_remote_state.organization.infosec_acct_id}:role/Administrator"
+    role_arn = "arn:aws:iam::${data.terraform_remote_state.organization.outputs.infosec_acct_id}:role/Administrator"
   }
 
   region = var.aws_default_region
@@ -125,7 +125,7 @@ resource "aws_iam_group" "master_billing" {
 
 resource "aws_iam_group_policy_attachment" "master_billing" {
   group      = aws_iam_group.master_billing.name
-  policy_arn = data.terraform_remote_state.organization.master_billing_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.master_billing_role_policy_arn
 }
 
 resource "aws_iam_group" "infosec_admins" {
@@ -134,17 +134,17 @@ resource "aws_iam_group" "infosec_admins" {
 
 resource "aws_iam_group_policy_attachment" "infosec_admins_administrator" {
   group      = aws_iam_group.infosec_admins.name
-  policy_arn = data.terraform_remote_state.organization.infosec_admin_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.infosec_admin_role_policy_arn
 }
 
 resource "aws_iam_group_policy_attachment" "infosec_admins_terragrunt_admin" {
   group      = aws_iam_group.infosec_admins.name
-  policy_arn = data.terraform_remote_state.organization.terragrunt_admin_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.terragrunt_admin_role_policy_arn
 }
 
 resource "aws_iam_group_policy_attachment" "infosec_admins_terragrunt_reader" {
   group      = aws_iam_group.infosec_admins.name
-  policy_arn = data.terraform_remote_state.organization.terragrunt_reader_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.terragrunt_reader_role_policy_arn
 }
 
 resource "aws_iam_group" "prod_admins" {
@@ -153,17 +153,17 @@ resource "aws_iam_group" "prod_admins" {
 
 resource "aws_iam_group_policy_attachment" "prod_admins_administrator" {
   group      = aws_iam_group.prod_admins.name
-  policy_arn = data.terraform_remote_state.organization.prod_admin_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.prod_admin_role_policy_arn
 }
 
 resource "aws_iam_group_policy_attachment" "prod_admins_terragrunt_admin" {
   group      = aws_iam_group.prod_admins.name
-  policy_arn = data.terraform_remote_state.organization.terragrunt_admin_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.terragrunt_admin_role_policy_arn
 }
 
 resource "aws_iam_group_policy_attachment" "prod_admins_terragrunt_reader" {
   group      = aws_iam_group.prod_admins.name
-  policy_arn = data.terraform_remote_state.organization.terragrunt_reader_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.terragrunt_reader_role_policy_arn
 }
 
 resource "aws_iam_group" "non_prod_admins" {
@@ -172,17 +172,17 @@ resource "aws_iam_group" "non_prod_admins" {
 
 resource "aws_iam_group_policy_attachment" "non_prod_admins_administrator" {
   group      = aws_iam_group.non_prod_admins.name
-  policy_arn = data.terraform_remote_state.organization.non_prod_admin_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.non_prod_admin_role_policy_arn
 }
 
 resource "aws_iam_group_policy_attachment" "non_prod_admins_terragrunt_admin" {
   group      = aws_iam_group.non_prod_admins.name
-  policy_arn = data.terraform_remote_state.organization.terragrunt_admin_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.terragrunt_admin_role_policy_arn
 }
 
 resource "aws_iam_group_policy_attachment" "non_prod_admins_terragrunt_reader" {
   group      = aws_iam_group.non_prod_admins.name
-  policy_arn = data.terraform_remote_state.organization.terragrunt_reader_role_policy_arn
+  policy_arn = data.terraform_remote_state.organization.outputs.terragrunt_reader_role_policy_arn
 }
 
 resource "aws_iam_group" "prod_developers" {
@@ -192,7 +192,7 @@ resource "aws_iam_group" "prod_developers" {
 module "assume_role_policy_prod_developers" {
   source       = "../../modules/assume-role-policy"
   account_name = "prod"
-  account_id   = data.terraform_remote_state.organization.prod_acct_id
+  account_id   = data.terraform_remote_state.organization.outputs.prod_acct_id
   role         = var.developer_role_name
 }
 
@@ -208,7 +208,7 @@ resource "aws_iam_group" "non_prod_developers" {
 module "assume_role_policy_non_prod_developers" {
   source       = "../../modules/assume-role-policy"
   account_name = "non-prod"
-  account_id   = data.terraform_remote_state.organization.non_prod_acct_id
+  account_id   = data.terraform_remote_state.organization.outputs.non_prod_acct_id
   role         = var.developer_role_name
 }
 

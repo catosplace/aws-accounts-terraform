@@ -36,7 +36,7 @@ provider "aws" {
 
 provider "aws" {
   assume_role {
-    role_arn = "arn:aws:iam::${data.terraform_remote_state.organization.prod_acct_id}:role/Administrator"
+    role_arn = "arn:aws:iam::${data.terraform_remote_state.organization.outputs.prod_acct_id}:role/Administrator"
   }
 
   region = var.aws_default_region
@@ -49,14 +49,14 @@ resource "aws_iam_account_alias" "alias" {
 resource "aws_cloudtrail" "cloudtrail" {
   name                       = "cloudtrail-prod"
   s3_key_prefix              = "prod"
-  s3_bucket_name             = data.terraform_remote_state.infosec.cloudtrail_bucket_id
+  s3_bucket_name             = data.terraform_remote_state.infosec.outputs.cloudtrail_bucket_id
   enable_log_file_validation = true
   is_multi_region_trail      = true
 }
 
 module "cross_account_role_developer" {
   source                    = "../../modules/cross-account-role"
-  assume_role_policy_json   = data.terraform_remote_state.organization.crossaccount_assume_from_infosec_policy_json
+  assume_role_policy_json   = data.terraform_remote_state.organization.outputs.crossaccount_assume_from_infosec_policy_json
   role                      = var.developer_role_name
   role_policy_arn           = var.developer_default_arn
   role_max_session_duration = 28800
